@@ -1,0 +1,30 @@
+<mat-card>
+    <mat-card-header>
+        
+        <mat-card-title>Add New Category</mat-card-title>
+        
+    </mat-card-header>
+    
+    <mat-card-content>
+        <!-- {{categoryData|json}} -->
+        <form (ngSubmit)="categoryAdd()">
+            <mat-form-field class="mt20 w100" appearance="outline">
+                <mat-label>Title</mat-label>
+                <input type="text" name="title" matInput
+                required
+                [(ngModel)]="categoryData.title"
+                placeholder="Ente here">
+            </mat-form-field>
+            <mat-form-field class="mt20 w100" appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea  name="description" matInput required
+                [(ngModel)]="categoryData.description"
+                placeholder="Ente Category Description"
+                rows="15"></textarea>
+            </mat-form-field>
+            <div class="container text-center mt10">
+                <button  type="submit" mat-raised-button color="primary">Add</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

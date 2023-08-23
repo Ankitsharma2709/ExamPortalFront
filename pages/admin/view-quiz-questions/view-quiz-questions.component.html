@@ -1,0 +1,142 @@
+<h1 class="mt20">Questions of {{quizTitle}}</h1>
+<div class="bootstrap-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <button mat-raised-button color="primary" [routerLink]="'/admin/add-question/'+qid">Add Question</button>
+            </div>
+            <div class="container-fluid">
+                
+                        <mat-form-field class="w100 mt20">
+                            <mat-label>Search here!</mat-label>
+                            <input
+                            [(ngModel)]="searchQuery"
+                            type="text"
+                            placeholder="Search Questions" 
+                            matInput>
+                            
+                        </mat-form-field>
+                        
+                    
+                    <button mat-raised-button (click)="searchQuestionsByWish()" color="primary">Search</button>
+                
+                
+            </div>
+            <!-- Search results -->
+            <div  *ngIf="searchResults.length>0">
+                <mat-card *ngFor="let s of searchResults" class="mt20">
+                    <mat-card-content>
+                        <p>
+                            <b>Q. {{ s.questionContent }}</b>
+                          </p>
+                    
+                          <div class="container-fluid">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <p>
+                                     1. {{ s.option1 }}
+                                </p>
+                              </div>
+                              <div class="col-md-6">
+                                <p>
+                                  2. {{ s.option2 }}
+                                </p>
+                              </div>
+                              <div class="col-md-6">
+                                <p>
+                                  3. {{ s.option3 }}
+                                </p>
+                              </div>
+                              <div class="col-md-6">
+                                <p>
+                                  4. {{ s.option4 }}
+                                </p>
+                              </div>
+                            </div>
+                            <mat-divider></mat-divider>
+                            <p class="mt10">
+                              <b>Correct Answer :</b> {{ s.answer }}
+                            </p>
+                    
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <button mat-raised-button color="accent" (click)="deleteQuestions(s.quesId)">Delete</button>
+                                  <button mat-raised-button class="ml10" color="accent" [routerLink]="'/admin/update-question/' + s.quiz.qid">Update</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>               
+                    </mat-card-content>
+                </mat-card>
+                
+
+            </div>
+            <div *ngIf="searchResults.length===0">
+                <mat-card *ngFor="let q of questionsToShow; let i = index" class="mt20">
+
+                    <mat-card-content>
+                        <p>
+                            <b>Q. {{(currentPage - 1) * questionsPerPage + i + 1}}</b>  <span class="ml20">{{q.questionContent}}</span>
+                        </p>
+    
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p>
+                                        1. {{q.option1}}
+                                    </p>
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        2. {{q.option2}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        3. {{q.option3}}
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>
+                                        4. {{q.option4}}
+                                    </p>
+                                </div>
+                                
+                               
+                            </div>
+                            <mat-divider></mat-divider>
+                            <p class="mt10">
+                                <b>Correct Answer :</b> {{q.answer}}
+                            </p>
+    
+                             <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button mat-raised-button color="accent" (click)="deleteQuestions(q.quesId)">Delete</button>
+                                        <button mat-raised-button class="ml10" color="accent" [routerLink]="'/admin/update-question/'+q.quiz.qid">Update</button>
+                                    </div>
+                                </div>
+                                
+                               
+                            </div>
+    
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                <div class="mt20" style="text-align: right;">
+                    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Previous</button>
+                        <span>{{currentPage}} / {{totalPages}}</span>
+                        <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Next</button>
+                
+                
+                </div>
+            </div>
+              
+            
+
+            
+        </div>
+    </div>
+</div>

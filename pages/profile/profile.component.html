@@ -1,0 +1,62 @@
+<mat-card>
+    <!-- this part is for header which is commented -->
+    <!-- <mat-card-header>
+        
+        <mat-card-title>Your profile details</mat-card-title>
+        
+    </mat-card-header> -->
+    <!-- {{user1|json}} -->
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="container">
+                <div class="container text-center ">
+                    <img 
+                    src="https://static.thenounproject.com/png/5034901-200.png"
+                    alt="">
+                    <h1 class="mt20">{{user1.firstName}} {{user1.lastName}}</h1>
+                </div>
+                <div class="row ">
+                    <div class="col-md-10 offset-md-1">
+                        <!-- table details -->
+                        <table class="table text-center">
+                            <tr>
+                                <td>Username</td>
+                                <td>{{user1.username}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>UserId</td>
+                                <td>Exam{{user1.id}}</td>
+                            </tr>
+
+                            <tr *ngIf="user1.phone">
+                                <td>Phone</td>
+                                <td>{{user1.phone}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Role</td>
+                                <td>{{user1.authorities[0].authority}}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Status</td>
+                                <td>{{user1.enabled?"ACTIVE":"NOT ACTIVE"}}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </mat-card-content>
+    
+    <mat-card-actions class="mat-actions text-center mt20">
+        <button mat-raised-button color="primary" class="mr10">Update</button>
+        <button mat-raised-button color="accent">Delete</button>
+    </mat-card-actions>
+    
+   
+    
+</mat-card>

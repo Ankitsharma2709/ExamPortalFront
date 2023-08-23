@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-list>
+        <div mat-subheader>All Categories</div>
+        <mat-list-item *ngFor="let folder of categories">
+          <mat-icon matListItemIcon>folder</mat-icon>
+          <div matListItemTitle>{{folder.title}}</div>
+          <div matListItemLine>{{folder.description}}</div>
+          
+        </mat-list-item>
+        
+
+        
+
+    </mat-list>
+</mat-card>

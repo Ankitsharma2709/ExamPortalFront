@@ -1,0 +1,159 @@
+<div class="bootstrap-wrapper" *ngIf="!isSubmit">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <!-- Instructions -->
+                
+                
+            </div>
+            <mat-divider></mat-divider>
+            <div class="col-md-8">
+                <!-- Questions -->
+                <ng-container *ngIf="questions">
+                    <mat-card-header><h3>{{questions[0].quiz.quizTitle}}</h3></mat-card-header>
+                    
+                        
+                   
+                </ng-container>
+                <!-- The [name]="i" part gives each group of radio buttons (each subject) a unique name based on the
+                     index (i) of the loop. For example, for the Math question (index 0), the name attribute will be
+                      "0". For the Science question (index 1), the name attribute will be "1", and so on.
+
+                    Now, the key point is that each group of radio buttons (subject) has a unique name, and 
+                    within each group, only one student (radio button) can be selected. So, when a student
+                     (radio button) is chosen in the Math question group, it ensures that no other student
+                      (radio button) in the Math question group can be selected simultaneously. Similarly,
+                       the same applies to the Science and History question groups. This is how radio buttons
+                        work—only one option can be chosen from each group.
+
+                    In your loop, by giving each question's radio buttons a unique group name (using the index i), 
+                    you are organizing them into separate groups, just like in a classroom. This organization ensures 
+                    that users can select one answer for each question without affecting the choices for other questions.
+
+
+                    In conclusion, the [name] attribute with a unique value for each question group (index i) ensures
+                    
+                    that users can only choose one answer for each question, and their choices won't interfere with
+                     selections in other questions, just like how students in a classroom answer questions independently.
+                -->
+
+
+
+
+
+ 
+                <mat-card *ngFor="let q of questionsToShow , let i = index" class="mt10">
+                    <mat-card-content class="mb20">
+                        <p>Q {{(currentPage - 1) * questionsPerPage + i + 1}}. {{q.questionContent}}</p>
+                    </mat-card-content>
+                    <mat-divider></mat-divider>
+                    <div class="row mt20">
+                        <div class="col-md-6">
+                            <input type="radio"
+                            [value]="q.option1"
+                            [name]="'questions'+i"
+                            [(ngModel)]="q.givenAnswer"
+                            class="mr20 mb20 ml20">{{q.option1}}
+
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio"
+                            [value]="q.option2"
+                            [name]="'questions'+i"
+                            [(ngModel)]="q.givenAnswer" 
+                            class="mr20 mb20 ml20">{{q.option2}}
+                            
+                        </div>
+                    </div>
+                    <div class="row mt20">
+                        <div class="col-md-6">
+                            <input type="radio"
+                            [value]="q.option3"
+                            [name]="'questions'+i"
+                            [(ngModel)]="q.givenAnswer"
+                            class="mr20 mb20 ml20">{{q.option3}}
+                        </div>
+                        <div class="col-md-6">
+                            <input type="radio"
+                            [value]="q.option4"
+                            [name]="'questions'+i"
+                            [(ngModel)]="q.givenAnswer"
+                            class="mr20 mb20 ml20">{{q.option4}}
+                        </div>
+                    </div>
+                    
+                    
+                </mat-card>
+                <div class=" mt20" style="text-align: right;">
+                    <button (click)="changePage(-1)" [disabled]="currentPage === 1">Previous</button>
+                    <span>{{currentPage}} / {{totalPages}}</span>
+                    <button (click)="changePage(1)" [disabled]="currentPage === totalPages">Next</button>
+                  </div>
+
+                
+                    <div class="container text-center mt20">
+                        <button (click)="submitQuiz()" mat-raised-button color="primary">Submit</button>
+                    </div>
+                    
+                
+            </div>
+            <div class="col-md-2">
+                <!-- progress -->
+                <mat-card class="mt20" >
+                    <mat-card-header>
+                        <mat-card-title>Progress</mat-card-title>
+                        <mat-card-subtitle>
+                            Quiz will be automatically submitted when the timer reaches <b>0min and 0seconds</b>
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content >
+                        <h4 class="text-center">{{getFormattedTime()}}</h4>
+                        <mat-spinner
+                        mode="determinate"
+                        [value]="(timer/(this.questions.length*2*60))*100"
+                        style="margin: auto;"></mat-spinner>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Show the result -->
+<div class="bootstrap-wrapper" *ngIf="isSubmit">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h2>Your Result!!</h2>
+                    </mat-card-title>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <mat-card-content class="mb20">
+                    <h3>Marks Got: {{marksGot}}</h3>
+                    <h3>Questions Attempted: {{attempted}}</h3>
+                    <h3>Corrct Answers: {{correctAnswers}}</h3>
+                </mat-card-content>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <div class="container text-center">
+                        <button (click)="printPage()" mat-raised-button color="primary">Print</button>
+                            <button mat-raised-button color="accent" [routerLink]="'/user/0'" class="ml20" >Home</button>
+
+                    </div>
+                    
+                        
+                            
+
+                       
+                    
+                    
+
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

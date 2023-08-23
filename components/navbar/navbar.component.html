@@ -1,0 +1,53 @@
+<!-- <p>navbar works!</p> -->
+<mat-toolbar color="primary" >
+    <a routerLink="/" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>menu_book</mat-icon>
+    </a>
+    <span>Exam Portal</span>
+    <span class="example-spacer"></span>
+    <a 
+    *ngIf="!login.isLoggedIn()"
+    routerLink="/login"
+    mat-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <span>Login</span>
+      <span class="example-spacer"></span>
+      
+    </a>
+    <a
+    *ngIf="!login.isLoggedIn()"
+        routerLink="/signup" 
+     mat-button class="example-icon" aria-label="Example icon-button with share icon">
+      <!-- <mat-icon>app_registration</mat-icon> -->
+      <span>Register</span>
+      <span class="example-spacer"></span>
+    </a>
+    
+    <!-- <span class="example-spacer"></span> -->
+
+    <a
+    
+    *ngIf="login.isLoggedIn()"
+    routerLink="/admin"
+        
+     mat-button class="example-icon" aria-label="Example icon-button with share icon">
+     <span>{{user.username}}</span>
+     <span class="example-spacer"></span>
+    </a>
+
+
+
+    <a
+    (click)="logout()"
+    *ngIf="login.isLoggedIn()"
+        
+     mat-button class="example-icon" aria-label="Example icon-button with share icon">
+     <span>Logout</span>
+     <span class="example-spacer"></span>
+    </a>
+
+    
+
+
+    
+  </mat-toolbar>
+  
